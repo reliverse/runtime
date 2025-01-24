@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { getUserAgent } from "../src/detect";
+import { getUserAgent } from "../detect.js";
 
 describe("get user agent", () => {
   beforeEach(() => {

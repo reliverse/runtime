@@ -4,7 +4,7 @@ import type {
   AgentCommands,
   Command,
   ResolvedCommand,
-} from "~/types";
+} from "./types.js";
 
 function npmRun(agent: string) {
   return (args: string[]) => {
@@ -100,7 +100,7 @@ export const COMMANDS = {
  *
  * For example, to show how to install `reliverse` globally using `pnpm`:
  * ```js
- * import { resolveCommand } from '@reliverse/pm/utils/commands'
+ * import { resolveCommand } from '@reliverse/runtime/utils/commands'
  * const { command, args } = resolveCommand('pnpm', 'global', ['reliverse'])
  * console.log(`${command} ${args.join(' ')}`) // 'pnpm add -g reliverse'
  * ```

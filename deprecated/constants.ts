@@ -1,4 +1,4 @@
-import type { Agent, AgentName } from "./types";
+import type { Agent, AgentName } from "./types.js";
 
 export const AGENTS: Agent[] = [
   "npm",

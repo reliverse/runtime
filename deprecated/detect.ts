@@ -3,9 +3,9 @@ import fsPromises from "node:fs/promises";
 import process from "node:process";
 import path from "pathe";
 
-import type { Agent, AgentName, DetectOptions, DetectResult } from "~/types";
+import type { Agent, AgentName, DetectOptions, DetectResult } from "./types.js";
 
-import { AGENTS, LOCKS } from "~/constants";
+import { AGENTS, LOCKS } from "./constants.js";
 
 /**
  * Detects the package manager used in the project.
@@ -89,7 +89,7 @@ export function detectSync(options: DetectOptions = {}): DetectResult | null {
  * This method will check for `process.env.npm_config_user_agent`.
  */
 export function getUserAgent(): AgentName | null {
-  const userAgent = process.env.npm_config_user_agent;
+  const userAgent = process.env["npm_config_user_agent"];
   if (!userAgent) {
     return null;
   }

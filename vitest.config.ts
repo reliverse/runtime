@@ -1,7 +1,7 @@
 import process from "node:process";
 import { defineConfig } from "vitest/config";
 
-process.env.NI_CONFIG_FILE = "false";
+process.env["NI_CONFIG_FILE"] = "false";
 
 export default defineConfig({
   test: {

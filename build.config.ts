@@ -4,18 +4,19 @@ export default defineBuildConfig({
   declaration: true,
   entries: [
     {
-      outDir: "dist",
       builder: "mkdist",
-      input: "src",
+      outDir: "dist-npm",
       format: "esm",
+      input: "./src",
       ext: "js",
     },
   ],
   rollup: {
-    inlineDependencies: true,
     emitCJS: false,
     esbuild: {
-      target: "es2022",
+      exclude: ["**/*.test.ts"],
+      target: "es2023",
+      minify: true,
     },
   },
 });

@@ -6,5 +6,6 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never",
     "source.removeUnused": "never"
-  }
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

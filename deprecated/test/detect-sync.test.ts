@@ -5,8 +5,8 @@ import { tmpdir } from "node:os";
 import path from "pathe";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
-import { AGENTS } from "../src/constants";
-import { detect } from "../src/detect";
+import { AGENTS } from "../constants.js";
+import { detectSync } from "../detect.js";
 
 let basicLog: MockInstance;
 let errorLog: MockInstance;
@@ -19,7 +19,7 @@ function detectTest(fixture: string, agent: string) {
     const dir = path.join(__dirname, "fixtures", fixture, agent);
     await fs.copy(dir, cwd);
 
-    expect(await detect({ cwd })).toMatchSnapshot();
+    expect(detectSync({ cwd })).toMatchSnapshot();
   };
 }
 

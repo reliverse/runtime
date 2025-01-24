@@ -9,7 +9,7 @@ export default tseslint.config(
   {
     ignores: [
       "**/.{git,next,astro,wxt}/",
-      "**/{node_modules,dist,public,drizzle}/",
+      "**/{node_modules,dist,public,drizzle,dist-npm,dist-jsr}/",
     ],
   },
   eslint.configs.recommended,

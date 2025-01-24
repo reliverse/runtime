@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import type { Agent } from "../src/types";
+import type { Agent } from "../types.js";
 
-import { COMMANDS, resolveCommand } from "../src/commands";
+import { COMMANDS, resolveCommand } from "../commands.js";
 
 Object.entries(COMMANDS)
   .map(([pm, c]) => [pm as Agent, c] as const)
