@@ -1,0 +1,23 @@
+INFO    Initializing build process for main project to NPM only...
+INFO    Building NPM distribution...
+INFO    Using NPM builder: mkdist
+SUCCESS Build succeeded for default
+INFO      dist-npm/bin (total size: 23.1 kB)
+  └─ dist-npm/bin/pkgman.d.ts (1.11 kB)
+  └─ dist-npm/bin/main.js (91 B)
+  └─ dist-npm/bin/main.d.ts (94 B)
+  └─ dist-npm/bin/platforms.d.ts (397 B)
+  └─ dist-npm/bin/pkgman.js (6.59 kB)
+  └─ dist-npm/bin/runtime.d.ts (6.52 kB)
+  └─ dist-npm/bin/runtime.js (5.33 kB)
+  └─ dist-npm/bin/platforms.js (2.02 kB)
+  └─ dist-npm/bin/types.d.ts (987 B)
+INFO    Σ Total dist size: 23.1 kB (build time: 1.3 seconds)
+SUCCESS Regular bundle completed in 1.3 seconds using mkdist builder
+INFO    Paths replacement in C:/B/L/runtime/dist-npm/bin folder...
+INFO    Generating distribution package.json and tsconfig.json (isJsr=false)...
+SUCCESS NPM distribution built successfully (9 files, 26 kB)
+SUCCESS [C:/B/L/runtime/dist-npm] Successfully created regular distribution: "dist-npm" (C:/B/L/runtime/dist-npm/bin/main.js) with (9 files (26 kB))
+INFO    Publishing to NPM...
+SUCCESS Distribution folders removed successfully
+SUCCESS 🎉 Build and publishing completed successfully (in 1.4 seconds)

@@ -2,32 +2,33 @@ import { env, isWindows, isLinux, isMacOS } from "./runtime.js";
 
 /**
  * Determines if Unicode is supported in the current terminal.
- * @returns {boolean} True if Unicode is supported, false otherwise.
+ * - On Linux, the Linux console does not support Unicode.
+ * - Returns true if Unicode is supported, false otherwise.
  */
 export function isUnicodeSupported(): boolean {
   if (isLinux) {
-    return env["TERM"] !== "linux";
+    return env.TERM !== "linux";
   }
   return (
-    env["WT_SESSION"] !== undefined ||
-    env["TERMINUS_SUBLIME"] !== undefined ||
-    env["ConEmuTask"] === "{cmd::Cmder}" ||
-    env["TERM_PROGRAM"] === "Terminus-Sublime" ||
-    env["TERM_PROGRAM"] === "vscode" ||
-    env["TERM"] === "xterm-256color" ||
-    env["TERM"] === "alacritty" ||
-    env["TERMINAL_EMULATOR"] === "JetBrains-JediTerm"
+    env.WT_SESSION !== undefined ||
+    env.TERMINUS_SUBLIME !== undefined ||
+    env.ConEmuTask === "{cmd::Cmder}" ||
+    env.TERM_PROGRAM === "Terminus-Sublime" ||
+    env.TERM_PROGRAM === "vscode" ||
+    env.TERM === "xterm-256color" ||
+    env.TERM === "alacritty" ||
+    env.TERMINAL_EMULATOR === "JetBrains-JediTerm"
   );
 }
 
 /**
- * Determines the current terminal name based on environment variables.
- * @returns {string} The name of the current terminal or "Unknown" if it cannot be determined.
+ * Determines the current terminal
+ * name based on environment variables.
  */
 export function getCurrentTerminalName(): string {
-  const termProgram: string | undefined = env["TERM_PROGRAM"];
-  const term: string | undefined = env["TERM"];
-  const terminalEmulator: string | undefined = env["TERMINAL_EMULATOR"];
+  const termProgram: string | undefined = env.TERM_PROGRAM;
+  const term: string | undefined = env.TERM;
+  const terminalEmulator: string | undefined = env.TERMINAL_EMULATOR;
 
   if (termProgram) {
     switch (termProgram.toLowerCase()) {
@@ -46,6 +47,8 @@ export function getCurrentTerminalName(): string {
         return "WezTerm";
       case "terminus":
         return "Terminus";
+      case "warp":
+        return "Warp";
       default:
         return `TERM_PROGRAM: ${termProgram}`;
     }
@@ -80,14 +83,16 @@ export function getCurrentTerminalName(): string {
     }
   }
 
-  // Fallback based on platform if terminal cannot be determined
+  // Fallback based on platform if
+  // terminal cannot be determined
   if (isWindows) {
     return "Windows Terminal";
-  } else if (isMacOS) {
+  }
+  if (isMacOS) {
     return "macOS Terminal";
-  } else if (isLinux) {
+  }
+  if (isLinux) {
     return "Linux Terminal";
   }
-
   return "Unknown Terminal";
 }

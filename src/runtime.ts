@@ -59,7 +59,7 @@ export const env = new Proxy<EnvObject>(_envShim, {
     }
     const e = _getEnv(true);
     // fully remove the key if possible
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+
     delete e[prop as any];
     return true;
   },
@@ -72,7 +72,7 @@ export const env = new Proxy<EnvObject>(_envShim, {
 /**
  * The current NODE_ENV value or an empty string if not set.
  */
-export const nodeENV = env["NODE_ENV"] || "";
+export const nodeENV = env.NODE_ENV || "";
 
 /**
  * Additional shims for process properties that might be needed if we're
@@ -125,12 +125,12 @@ export const platform = process.platform || "";
  * Detect if the current environment is a CI environment, by checking the 'CI'
  * variable or whether a known provider indicates a CI context.
  */
-export const isCI = toBoolean(env["CI"]);
+export const isCI = toBoolean(env.CI);
 
 /**
  * Detect whether the current process stdout is connected to a TTY (useful for color output).
  */
-export const hasTTY = toBoolean(process.stdout && process.stdout.isTTY);
+export const hasTTY = toBoolean(process.stdout?.isTTY);
 
 /**
  * Detect if a `window` global object is present.
@@ -142,13 +142,13 @@ export const hasWindow = typeof window !== "undefined";
  * Detect whether the `DEBUG` environment variable is set.
  * Useful for enabling debug logs or other debug behaviors.
  */
-export const isDebug = toBoolean(env["DEBUG"]);
+export const isDebug = toBoolean(env.DEBUG);
 
 /**
  * Detect whether `NODE_ENV` or a 'TEST' environment variable is set to 'test'.
  * Useful for test-specific logic or conditionals.
  */
-export const isTest = nodeENV === "test" || toBoolean(env["TEST"]);
+export const isTest = nodeENV === "test" || toBoolean(env.TEST);
 
 /**
  * Detect whether `NODE_ENV` is 'production'.
@@ -164,7 +164,7 @@ export const isDevelopment = nodeENV === "dev" || nodeENV === "development";
  * Indicates a minimal environment if 'MINIMAL' is set, or if running in CI,
  * or if in test mode, or if no TTY is available.
  */
-export const isMinimal = toBoolean(env["MINIMAL"]) || isCI || isTest || !hasTTY;
+export const isMinimal = toBoolean(env.MINIMAL) || isCI || isTest || !hasTTY;
 
 /**
  * Detect whether the platform is Windows.
@@ -186,16 +186,16 @@ export const isMacOS = /^darwin/i.test(platform);
  * Depends on terminal features, environment variables, and CI checks.
  */
 export const isColorSupported =
-  !toBoolean(env["NO_COLOR"]) &&
-  (toBoolean(env["FORCE_COLOR"]) ||
-    ((hasTTY || isWindows) && env["TERM"] !== "dumb") ||
+  !toBoolean(env.NO_COLOR) &&
+  (toBoolean(env.FORCE_COLOR) ||
+    ((hasTTY || isWindows) && env.TERM !== "dumb") ||
     isCI);
 
 /**
  * Node.js version without the leading 'v', if available.
  */
 export const nodeVersion =
-  (process.versions?.["node"] || "").replace(/^v/, "") || null;
+  (process.versions?.node || "").replace(/^v/, "") || null;
 
 /**
  * Parsed major version of Node.js, if available, or null otherwise.
@@ -350,8 +350,8 @@ function _detectProvider(): ProviderInfo {
     // StackBlitz detection:
     // If "SHELL === /bin/jsh" and "process.versions.webcontainer" is present,
     // that typically indicates a StackBlitz environment.
-    const shell = process.env["SHELL"];
-    const wcVersion = process.versions?.["webcontainer"];
+    const shell = process.env.SHELL;
+    const wcVersion = process.versions?.webcontainer;
     if (shell === "/bin/jsh" && wcVersion) {
       return {
         name: "stackblitz",
@@ -402,7 +402,7 @@ export const isNode = process.release?.name === "node";
 /**
  * Detect if the runtime is Bun by checking for a global Bun object or bun version info.
  */
-export const isBun = !!globalThis.Bun || !!process.versions?.["bun"];
+export const isBun = !!globalThis.Bun || !!process.versions?.bun;
 
 /**
  * Detect if the runtime is Deno by checking for a global Deno object.

@@ -168,7 +168,7 @@ async function detectPackageManagers(
   }
 
   // 3. Environment detection
-  const pkgManagerUserAgent = process.env["npm_config_user_agent"] ?? "";
+  const pkgManagerUserAgent = process.env.npm_config_user_agent ?? "";
   if (pkgManagerUserAgent.startsWith("yarn")) {
     detected.push({ packageManager: "yarn", source: "env" });
   } else if (pkgManagerUserAgent.startsWith("pnpm")) {
@@ -324,7 +324,7 @@ export async function isBunPM(): Promise<boolean> {
  * Check if running in Bun environment
  */
 export function isBunRuntime(): boolean {
-  return Boolean(process.versions["bun"]);
+  return Boolean(process.versions.bun);
 }
 
 /**
@@ -336,7 +336,7 @@ export function detectEnvironment(): RuntimeEnvironment {
   }
 
   if (typeof process !== "undefined") {
-    if (process.versions["bun"]) {
+    if (process.versions.bun) {
       return "bun";
     }
     if (process.versions.node) {
